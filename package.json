@@ -1,0 +1,12 @@
+{
+  "name": "master-escala",
+  "version": "1.0.0",
+  "description": "Landing page for Master Escala",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
