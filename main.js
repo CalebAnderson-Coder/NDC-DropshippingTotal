@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el input de teléfono
-    const phoneInput = document.querySelector('input[type="tel"]');
+    const phoneInput = document.getElementById('phone');
     if (phoneInput) {
         window.intlTelInput(phoneInput, {
-            preferredCountries: ['co', 'mx', 'pe', 'ec', 'cl', 'ar'],
+            preferredCountries: ['mx', 'co', 'pe', 'cl', 'ar', 'es'],
             separateDialCode: true,
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.16/js/utils.js",
         });
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el formulario
     const form = document.getElementById('contact-form');
     if (form) {
-        form.addEventListener('submit', handleFormSubmit);
+        form.addEventListener('submit', handleSubmit);
     }
 
     // Inicializar los botones CTA
@@ -31,26 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Manejar el envío del formulario
-async function handleFormSubmit(event) {
+function handleSubmit(event) {
     event.preventDefault();
     
-    const form = event.target;
-    const formData = new FormData(form);
+    // Obtener los valores del formulario
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const country = document.getElementById('country').value;
     
-    // Validación del formulario
-    if (!validateForm(form)) {
-        return;
-    }
-
-    try {
-        // Aquí iría la lógica para enviar los datos al servidor
-        // Por ahora solo simulamos el envío
-        await simulateFormSubmission(formData);
-        showSuccess(form);
-        form.reset();
-    } catch (error) {
-        showError(form, 'Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
-    }
+    // Aquí puedes agregar la lógica para enviar los datos a tu servidor
+    console.log('Datos del formulario:', { name, email, phone, country });
+    
+    // Mostrar mensaje de éxito
+    alert('¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.');
+    
+    // Limpiar el formulario
+    event.target.reset();
+    
+    return false;
 }
 
 // Validar el formulario
@@ -145,7 +144,7 @@ function simulateFormSubmission(formData) {
 
 // Desplazamiento suave al formulario
 function scrollToForm() {
-    const formSection = document.getElementById('contact-form-section');
+    const formSection = document.querySelector('.contact-form');
     if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth' });
     }
